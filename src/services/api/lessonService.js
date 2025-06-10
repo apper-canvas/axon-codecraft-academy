@@ -60,4 +60,10 @@ class LessonService {
   }
 }
 
-export default new LessonService();
+const lessonServiceInstance = new LessonService();
+
+// Named export for index.js compatibility
+export const lessonService = lessonServiceInstance;
+
+// Default export for direct imports
+export default lessonServiceInstance;
