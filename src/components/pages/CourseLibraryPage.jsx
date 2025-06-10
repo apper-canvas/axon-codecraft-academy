@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import ApperIcon from '../components/ApperIcon';
-import CourseCard from '../components/CourseCard';
-import SkeletonLoader from '../components/SkeletonLoader';
-import ErrorState from '../components/ErrorState';
-import EmptyState from '../components/EmptyState';
-import courseService from '../services/api/courseService';
+import CourseCard from '@/components/molecules/CourseCard';
+import SkeletonCard from '@/components/molecules/SkeletonCard';
+import ErrorState from '@/components/molecules/ErrorState';
+import EmptyState from '@/components/molecules/EmptyState';
+import CourseFilters from '@/components/organisms/CourseFilters';
+import courseService from '@/services/api/courseService';
 
-function CourseLibrary() {
+function CourseLibraryPage() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -56,7 +56,7 @@ function CourseLibrary() {
             <div className="h-8 bg-surface-200 rounded w-48 mb-4 animate-pulse"></div>
             <div className="h-4 bg-surface-200 rounded w-96 animate-pulse"></div>
           </div>
-          <SkeletonLoader count={6} />
+          <SkeletonCard count={6} />
         </div>
       </div>
     );
@@ -107,58 +107,16 @@ function CourseLibrary() {
         </motion.div>
 
         {/* Search and Filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-white p-6 rounded-xl shadow-sm mb-8"
-        >
-          <div className="flex flex-col lg:flex-row gap-4">
-            {/* Search */}
-            <div className="flex-1">
-              <div className="relative">
-                <ApperIcon name="Search" className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-surface-400" />
-                <input
-                  type="text"
-                  placeholder="Search courses..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors"
-                />
-              </div>
-            </div>
-
-            {/* Language Filter */}
-            <div>
-              <select
-                value={selectedLanguage}
-                onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors bg-white"
-              >
-                {languages.map(lang => (
-                  <option key={lang} value={lang}>
-                    {lang === 'all' ? 'All Languages' : lang}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Difficulty Filter */}
-            <div>
-              <select
-                value={selectedDifficulty}
-                onChange={(e) => setSelectedDifficulty(e.target.value)}
-                className="px-4 py-3 border border-surface-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors bg-white"
-              >
-                {difficulties.map(diff => (
-                  <option key={diff} value={diff}>
-                    {diff === 'all' ? 'All Levels' : diff}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </motion.div>
+        <CourseFilters
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedLanguage={selectedLanguage}
+          setSelectedLanguage={setSelectedLanguage}
+          selectedDifficulty={selectedDifficulty}
+          setSelectedDifficulty={setSelectedDifficulty}
+          languages={languages}
+          difficulties={difficulties}
+        />
 
         {/* Results */}
         {filteredCourses.length === 0 ? (
@@ -196,4 +154,4 @@ function CourseLibrary() {
   );
 }
 
-export default CourseLibrary;
+export default CourseLibraryPage;

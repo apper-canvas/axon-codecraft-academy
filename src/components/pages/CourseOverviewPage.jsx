@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
-import ApperIcon from '../components/ApperIcon';
-import LessonList from '../components/LessonList';
-import SkeletonLoader from '../components/SkeletonLoader';
-import ErrorState from '../components/ErrorState';
-import courseService from '../services/api/courseService';
-import lessonService from '../services/api/lessonService';
-import progressService from '../services/api/progressService';
+import ApperIcon from '@/components/ApperIcon';
+import LessonList from '@/components/organisms/LessonList';
+import SkeletonCard from '@/components/molecules/SkeletonCard';
+import ErrorState from '@/components/molecules/ErrorState';
+import Button from '@/components/atoms/Button';
+import courseService from '@/services/api/courseService';
+import lessonService from '@/services/api/lessonService';
+import progressService from '@/services/api/progressService';
 
-function CourseOverview() {
+function CourseOverviewPage() {
   const { courseId } = useParams();
   const navigate = useNavigate();
   const [course, setCourse] = useState(null);
@@ -79,7 +80,7 @@ function CourseOverview() {
     return (
       <div className="min-h-full bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <SkeletonLoader count={1} />
+          <SkeletonCard count={1} />
         </div>
       </div>
     );
@@ -119,16 +120,16 @@ function CourseOverview() {
     <div className="min-h-full bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
-        <motion.button
+        <Button
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3 }}
           onClick={() => navigate('/courses')}
-          className="flex items-center space-x-2 text-surface-600 hover:text-secondary mb-6 transition-colors duration-150"
+          className="flex items-center space-x-2 text-surface-600 hover:text-secondary mb-6 px-0 py-0"
         >
           <ApperIcon name="ArrowLeft" className="w-4 h-4" />
           <span>Back to Courses</span>
-        </motion.button>
+        </Button>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
@@ -192,14 +193,14 @@ function CourseOverview() {
               )}
 
               {/* Action Button */}
-              <motion.button
+              <Button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={hasStarted ? resumeCourse : startCourse}
-                className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary/90 transition-colors duration-150"
+                className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary/90"
               >
                 {hasStarted ? 'Continue Learning' : 'Start Course'}
-              </motion.button>
+              </Button>
             </div>
           </motion.div>
 
@@ -224,4 +225,4 @@ function CourseOverview() {
   );
 }
 
-export default CourseOverview;
+export default CourseOverviewPage;

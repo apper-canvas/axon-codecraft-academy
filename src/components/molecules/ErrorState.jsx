@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
-import ApperIcon from './ApperIcon';
+import PropTypes from 'prop-types';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
 
 function ErrorState({ message, onRetry }) {
   return (
@@ -21,17 +23,22 @@ function ErrorState({ message, onRetry }) {
       <p className="text-surface-600 mb-6">{message}</p>
       
       {onRetry && (
-        <motion.button
+        <Button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={onRetry}
-          className="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors duration-150"
+          className="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90"
         >
           Try Again
-        </motion.button>
+        </Button>
       )}
     </motion.div>
   );
 }
+
+ErrorState.propTypes = {
+  message: PropTypes.string.isRequired,
+  onRetry: PropTypes.func,
+};
 
 export default ErrorState;

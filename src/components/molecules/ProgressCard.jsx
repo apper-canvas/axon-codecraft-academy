@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
-import ApperIcon from './ApperIcon';
+import PropTypes from 'prop-types';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
 
 function ProgressCard({ course, progress, onContinue }) {
   const completionPercentage = Math.round((progress.completedLessons.length / course.lessonCount) * 100);
@@ -101,20 +103,36 @@ function ProgressCard({ course, progress, onContinue }) {
       </div>
 
       {/* Action Button */}
-      <motion.button
+      <Button
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={onContinue}
-        className={`w-full py-3 px-4 rounded-lg font-medium transition-colors duration-150 ${
+        className={`w-full py-3 px-4 rounded-lg font-medium ${
           isCompleted
             ? 'bg-success/10 text-success hover:bg-success/20'
             : 'bg-primary text-white hover:bg-primary/90'
         }`}
       >
         {isCompleted ? 'Review Course' : 'Continue Learning'}
-      </motion.button>
+      </Button>
     </motion.div>
   );
 }
+
+ProgressCard.propTypes = {
+  course: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    lessonCount: PropTypes.number.isRequired,
+    difficulty: PropTypes.string.isRequired,
+    language: PropTypes.string.isRequired,
+  }).isRequired,
+  progress: PropTypes.shape({
+    completedLessons: PropTypes.arrayOf(PropTypes.string).isRequired,
+    quizScores: PropTypes.objectOf(PropTypes.number), // Assuming quizScores can be an object
+    lastAccessed: PropTypes.string.isRequired,
+  }).isRequired,
+  onContinue: PropTypes.func.isRequired,
+};
 
 export default ProgressCard;

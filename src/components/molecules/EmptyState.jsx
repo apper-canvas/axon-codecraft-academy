@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
-import ApperIcon from './ApperIcon';
+import PropTypes from 'prop-types';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
 
 function EmptyState({ title, description, actionLabel, onAction, icon = "Package" }) {
   return (
@@ -21,17 +23,25 @@ function EmptyState({ title, description, actionLabel, onAction, icon = "Package
       <p className="text-surface-600 mb-6 max-w-md mx-auto">{description}</p>
       
       {actionLabel && onAction && (
-        <motion.button
+        <Button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={onAction}
-          className="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors duration-150"
+          className="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90"
         >
           {actionLabel}
-        </motion.button>
+        </Button>
       )}
     </motion.div>
   );
 }
+
+EmptyState.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  actionLabel: PropTypes.string,
+  onAction: PropTypes.func,
+  icon: PropTypes.string,
+};
 
 export default EmptyState;

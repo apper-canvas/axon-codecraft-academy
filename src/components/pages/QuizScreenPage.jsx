@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { toast } from 'react-toastify';
-import ApperIcon from '../components/ApperIcon';
-import CodeEditor from '../components/CodeEditor';
-import SkeletonLoader from '../components/SkeletonLoader';
-import ErrorState from '../components/ErrorState';
-import quizService from '../services/api/quizService';
-import lessonService from '../services/api/lessonService';
-import progressService from '../services/api/progressService';
+import ApperIcon from '@/components/ApperIcon';
+import SkeletonCard from '@/components/molecules/SkeletonCard';
+import ErrorState from '@/components/molecules/ErrorState';
+import QuizQuestionDisplay from '@/components/organisms/QuizQuestionDisplay';
+import QuizResultSummary from '@/components/organisms/QuizResultSummary';
+import Button from '@/components/atoms/Button';
+import quizService from '@/services/api/quizService';
+import lessonService from '@/services/api/lessonService';
+import progressService from '@/services/api/progressService';
 
-function QuizScreen() {
+function QuizScreenPage() {
   const { lessonId } = useParams();
   const navigate = useNavigate();
   const [quiz, setQuiz] = useState(null);
@@ -79,6 +81,15 @@ function QuizScreen() {
           }).join('\n');
           setOutput(output);
         }
+      } else if (code.includes('System.out.println(')) {
+        const printMatches = code.match(/System\.out\.println\((.*?)\)/g);
+        if (printMatches) {
+          const output = printMatches.map(match => {
+            const content = match.match(/System\.out\.println\((.*?)\)/)[1];
+            return content.replace(/['"]/g, '');
+          }).join('\n');
+          setOutput(output);
+        }
       } else {
         setOutput('Code executed successfully!');
       }
@@ -131,14 +142,18 @@ function QuizScreen() {
   };
 
   const goToLesson = () => {
-    navigate(`/course/${lesson.courseId}/lesson/${lessonId}`);
+    if (lesson?.courseId) {
+        navigate(`/course/${lesson.courseId}/lesson/${lessonId}`);
+    } else {
+        navigate('/'); // Fallback to home if courseId is missing
+    }
   };
 
   if (loading) {
     return (
       <div className="h-full bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <SkeletonLoader count={1} />
+          <SkeletonCard count={1} />
         </div>
       </div>
     );
@@ -173,55 +188,20 @@ function QuizScreen() {
   const question = quiz.questions[currentQuestion];
   const isLastQuestion = currentQuestion === quiz.questions.length - 1;
   const canSubmit = Object.keys(answers).length === quiz.questions.length;
+  // Add userAnswer to question object for QuizQuestionDisplay prop
+  const questionWithUserAnswer = { ...question, userAnswer: answers[currentQuestion] };
+
 
   if (submitted) {
     return (
       <div className="h-full bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-xl shadow-sm p-8 text-center"
-          >
-            <div className={`w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center ${
-              score >= quiz.passingScore ? 'bg-success/10' : 'bg-error/10'
-            }`}>
-              <ApperIcon 
-                name={score >= quiz.passingScore ? "CheckCircle" : "XCircle"} 
-                className={`w-8 h-8 ${score >= quiz.passingScore ? 'text-success' : 'text-error'}`} 
-              />
-            </div>
-            
-            <h2 className="text-2xl font-bold text-secondary mb-2">
-              {score >= quiz.passingScore ? 'Quiz Passed!' : 'Quiz Failed'}
-            </h2>
-            
-            <p className="text-lg text-surface-600 mb-6">
-              Your score: <span className="font-semibold">{score}%</span>
-              <br />
-              Passing score: {quiz.passingScore}%
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={retryQuiz}
-                className="px-6 py-3 border-2 border-primary text-primary font-medium rounded-lg hover:bg-primary/5 transition-colors duration-150"
-              >
-                Retry Quiz
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={goToLesson}
-                className="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors duration-150"
-              >
-                Back to Lesson
-              </motion.button>
-            </div>
-          </motion.div>
+          <QuizResultSummary
+            score={score}
+            passingScore={quiz.passingScore}
+            retryQuiz={retryQuiz}
+            goToLesson={goToLesson}
+          />
         </div>
       </div>
     );
@@ -233,13 +213,13 @@ function QuizScreen() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <button
+            <Button
               onClick={goToLesson}
-              className="flex items-center space-x-2 text-surface-600 hover:text-secondary transition-colors duration-150"
+              className="flex items-center space-x-2 text-surface-600 hover:text-secondary px-0 py-0"
             >
               <ApperIcon name="ArrowLeft" className="w-4 h-4" />
               <span>Back to Lesson</span>
-            </button>
+            </Button>
             <div className="text-sm text-surface-600">
               Question {currentQuestion + 1} of {quiz.questions.length}
             </div>
@@ -258,88 +238,47 @@ function QuizScreen() {
 
         {/* Question */}
         <AnimatePresence mode="wait">
-          <motion.div
-            key={currentQuestion}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white rounded-xl shadow-sm p-8"
-          >
-            <h2 className="text-xl font-semibold text-secondary mb-6">
-              {question.question}
-            </h2>
-
-            {question.type === 'multiple-choice' ? (
-              <div className="space-y-3">
-                {question.options.map((option, index) => (
-                  <motion.button
-                    key={index}
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    onClick={() => handleAnswerSelect(currentQuestion, option)}
-                    className={`w-full text-left p-4 rounded-lg border-2 transition-colors duration-150 ${
-                      answers[currentQuestion] === option
-                        ? 'border-primary bg-primary/5 text-primary'
-                        : 'border-surface-200 hover:border-surface-300 text-surface-700'
-                    }`}
-                  >
-                    {option}
-                  </motion.button>
-                ))}
-              </div>
-            ) : (
-              <div className="space-y-4">
-                <p className="text-surface-600 mb-4">{question.instructions}</p>
-                <CodeEditor
-                  code={code}
-                  setCode={setCode}
-                  output={output}
-                  onRun={runCode}
-                  language={question.language || 'python'}
-                />
-                <button
-                  onClick={() => handleAnswerSelect(currentQuestion, code)}
-                  disabled={!code.trim()}
-                  className="px-4 py-2 bg-success text-white rounded-lg hover:bg-success/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150"
-                >
-                  Submit Code
-                </button>
-              </div>
-            )}
-          </motion.div>
+          <QuizQuestionDisplay
+            question={questionWithUserAnswer}
+            currentQuestionIndex={currentQuestion}
+            handleAnswerSelect={handleAnswerSelect}
+            code={code}
+            setCode={setCode}
+            output={output}
+            runCode={runCode}
+          />
         </AnimatePresence>
 
         {/* Navigation */}
         <div className="flex items-center justify-between mt-8">
-          <button
+          <Button
             onClick={() => setCurrentQuestion(prev => Math.max(0, prev - 1))}
             disabled={currentQuestion === 0}
-            className="flex items-center space-x-2 px-4 py-2 text-surface-600 hover:text-secondary disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150"
+            className="flex items-center space-x-2 px-4 py-2 text-surface-600 hover:text-secondary disabled:opacity-50 disabled:cursor-not-allowed px-0 py-0"
           >
             <ApperIcon name="ArrowLeft" className="w-4 h-4" />
             <span>Previous</span>
-          </button>
+          </Button>
 
           <div className="flex items-center space-x-4">
             {isLastQuestion ? (
-              <motion.button
+              <Button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={submitQuiz}
                 disabled={!canSubmit}
-                className="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150"
+                className="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Submit Quiz
-              </motion.button>
+              </Button>
             ) : (
-              <button
+              <Button
                 onClick={() => setCurrentQuestion(prev => Math.min(quiz.questions.length - 1, prev + 1))}
-                className="flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-150"
+                className="flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
               >
                 <span>Next</span>
                 <ApperIcon name="ArrowRight" className="w-4 h-4" />
-              </button>
+              </Button>
             )}
           </div>
         </div>
@@ -348,4 +287,4 @@ function QuizScreen() {
   );
 }
 
-export default QuizScreen;
+export default QuizScreenPage;

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import ApperIcon from './ApperIcon';
+import PropTypes from 'prop-types';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
 
 function CodeEditor({ code, setCode, output, onRun, language = 'python' }) {
   const [isRunning, setIsRunning] = useState(false);
@@ -38,12 +40,12 @@ function CodeEditor({ code, setCode, output, onRun, language = 'python' }) {
           </span>
         </div>
         
-        <motion.button
+        <Button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleRun}
           disabled={isRunning || !code.trim()}
-          className="flex items-center space-x-2 px-4 py-2 bg-success text-white text-sm font-medium rounded hover:bg-success/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150"
+          className="flex items-center space-x-2 px-4 py-2 bg-success text-white text-sm font-medium rounded hover:bg-success/90 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isRunning ? (
             <>
@@ -61,7 +63,7 @@ function CodeEditor({ code, setCode, output, onRun, language = 'python' }) {
               <span>Run Code</span>
             </>
           )}
-        </motion.button>
+        </Button>
       </div>
 
       {/* Code Input */}
@@ -106,5 +108,13 @@ function CodeEditor({ code, setCode, output, onRun, language = 'python' }) {
     </div>
   );
 }
+
+CodeEditor.propTypes = {
+  code: PropTypes.string.isRequired,
+  setCode: PropTypes.func.isRequired,
+  output: PropTypes.string.isRequired,
+  onRun: PropTypes.func.isRequired,
+  language: PropTypes.string,
+};
 
 export default CodeEditor;

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
-function SkeletonLoader({ count = 3 }) {
+function SkeletonCard({ count = 3 }) {
   return (
     <div className="space-y-4">
       {[...Array(count)].map((_, index) => (
@@ -32,4 +33,8 @@ function SkeletonLoader({ count = 3 }) {
   );
 }
 
-export default SkeletonLoader;
+SkeletonCard.propTypes = {
+  count: PropTypes.number,
+};
+
+export default SkeletonCard;

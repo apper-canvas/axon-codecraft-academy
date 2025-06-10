@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import ApperIcon from './ApperIcon';
+import PropTypes from 'prop-types';
+import ApperIcon from '@/components/ApperIcon';
 
 function LessonList({ lessons, completedLessons, courseId }) {
   const navigate = useNavigate();
@@ -68,5 +69,14 @@ function LessonList({ lessons, completedLessons, courseId }) {
     </div>
   );
 }
+
+LessonList.propTypes = {
+  lessons: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  })).isRequired,
+  completedLessons: PropTypes.arrayOf(PropTypes.string).isRequired,
+  courseId: PropTypes.string.isRequired,
+};
 
 export default LessonList;

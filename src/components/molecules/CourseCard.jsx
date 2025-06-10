@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import ApperIcon from './ApperIcon';
+import PropTypes from 'prop-types';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
 
 function CourseCard({ course }) {
   const navigate = useNavigate();
@@ -97,5 +99,17 @@ function CourseCard({ course }) {
     </motion.div>
   );
 }
+
+CourseCard.propTypes = {
+  course: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    language: PropTypes.string.isRequired,
+    difficulty: PropTypes.string.isRequired,
+    lessonCount: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default CourseCard;

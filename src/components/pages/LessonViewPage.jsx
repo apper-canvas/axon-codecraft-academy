@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
-import ApperIcon from '../components/ApperIcon';
-import CodeEditor from '../components/CodeEditor';
-import LessonSidebar from '../components/LessonSidebar';
-import SkeletonLoader from '../components/SkeletonLoader';
-import ErrorState from '../components/ErrorState';
-import lessonService from '../services/api/lessonService';
-import progressService from '../services/api/progressService';
+import ApperIcon from '@/components/ApperIcon';
+import CodeEditor from '@/components/organisms/CodeEditor';
+import LessonSidebar from '@/components/organisms/LessonSidebar';
+import SkeletonCard from '@/components/molecules/SkeletonCard';
+import ErrorState from '@/components/molecules/ErrorState';
+import Button from '@/components/atoms/Button';
+import lessonService from '@/services/api/lessonService';
+import progressService from '@/services/api/progressService';
 
-function LessonView() {
+function LessonViewPage() {
   const { courseId, lessonId } = useParams();
   const navigate = useNavigate();
   const [lesson, setLesson] = useState(null);
@@ -120,7 +121,7 @@ function LessonView() {
       <div className="h-full bg-background">
         <div className="h-full flex">
           <div className="flex-1 p-6">
-            <SkeletonLoader count={1} />
+            <SkeletonCard count={1} />
           </div>
         </div>
       </div>
@@ -188,12 +189,12 @@ function LessonView() {
           <div className="flex-shrink-0 bg-white border-b border-surface-200 px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <button
+                <Button
                   onClick={() => setSidebarOpen(true)}
                   className="lg:hidden p-2 rounded-lg text-surface-600 hover:text-secondary hover:bg-surface-50"
                 >
                   <ApperIcon name="Menu" className="w-5 h-5" />
-                </button>
+                </Button>
                 <div>
                   <h1 className="text-xl font-semibold text-secondary">{lesson.title}</h1>
                   <p className="text-sm text-surface-600">
@@ -208,12 +209,12 @@ function LessonView() {
                     <span className="text-sm font-medium">Completed</span>
                   </div>
                 )}
-                <button
+                <Button
                   onClick={() => navigate(`/course/${courseId}`)}
-                  className="px-4 py-2 text-surface-600 hover:text-secondary transition-colors duration-150"
+                  className="px-4 py-2 text-surface-600 hover:text-secondary px-0 py-0"
                 >
                   Exit Course
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -256,34 +257,34 @@ function LessonView() {
                 <div className="flex items-center justify-between mt-12 pt-8 border-t border-surface-200">
                   <div>
                     {previousLesson && (
-                      <button
+                      <Button
                         onClick={() => navigate(`/course/${courseId}/lesson/${previousLesson.id}`)}
-                        className="flex items-center space-x-2 px-4 py-2 text-surface-600 hover:text-secondary transition-colors duration-150"
+                        className="flex items-center space-x-2 px-4 py-2 text-surface-600 hover:text-secondary px-0 py-0"
                       >
                         <ApperIcon name="ArrowLeft" className="w-4 h-4" />
                         <span>Previous</span>
-                      </button>
+                      </Button>
                     )}
                   </div>
                   <div className="flex items-center space-x-4">
                     {!isCompleted && (
-                      <motion.button
+                      <Button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={markLessonComplete}
-                        className="px-6 py-3 bg-success text-white font-medium rounded-lg hover:bg-success/90 transition-colors duration-150"
+                        className="px-6 py-3 bg-success text-white font-medium rounded-lg hover:bg-success/90"
                       >
                         Mark Complete
-                      </motion.button>
+                      </Button>
                     )}
                     {nextLesson && (
-                      <button
+                      <Button
                         onClick={() => navigate(`/course/${courseId}/lesson/${nextLesson.id}`)}
-                        className="flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-150"
+                        className="flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
                       >
                         <span>Next</span>
                         <ApperIcon name="ArrowRight" className="w-4 h-4" />
-                      </button>
+                      </Button>
                     )}
                   </div>
                 </div>
@@ -307,4 +308,4 @@ function LessonView() {
   );
 }
 
-export default LessonView;
+export default LessonViewPage;

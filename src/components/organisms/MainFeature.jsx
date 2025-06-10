@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import ApperIcon from './ApperIcon';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
 
 function MainFeature() {
   const navigate = useNavigate();
@@ -37,17 +38,17 @@ function MainFeature() {
       {/* Tab Navigation */}
       <div className="flex space-x-1 mb-6 bg-surface-50 p-1 rounded-lg">
         {tabs.map((tab) => (
-          <button
+          <Button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors duration-150 ${
+            className={`flex-1 px-4 py-2 text-sm font-medium rounded-md ${
               activeTab === tab
                 ? 'bg-white text-primary shadow-sm'
                 : 'text-surface-600 hover:text-secondary'
             }`}
           >
             {features[tab].title}
-          </button>
+          </Button>
         ))}
       </div>
 
@@ -71,14 +72,14 @@ function MainFeature() {
           {features[activeTab].description}
         </p>
         
-        <motion.button
+        <Button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={features[activeTab].action}
-          className="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors duration-150"
+          className="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90"
         >
           Get Started
-        </motion.button>
+        </Button>
       </motion.div>
     </div>
   );
