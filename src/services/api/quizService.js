@@ -1,4 +1,4 @@
-import quizzesData from '../mockData/quizzes.json';
+import quizzesData from '@/services/mockData/quizzes.json';
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -61,4 +61,11 @@ class QuizService {
   }
 }
 
-export default new QuizService();
+// Create service instance
+const quizServiceInstance = new QuizService();
+
+// Named export for consistency with index.js re-exports
+export const quizService = quizServiceInstance;
+
+// Default export for backward compatibility
+export default quizServiceInstance;
