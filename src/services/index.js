@@ -8,3 +8,5 @@ export { snippetService } from './api/snippetService';
 export * from './api/courseService';
 export * from './api/lessonService';
 export * from './api/progressService';
+export * from './api/quizService';
+export * from './api/snippetService';

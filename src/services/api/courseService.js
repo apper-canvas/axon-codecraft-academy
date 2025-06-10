@@ -51,5 +51,9 @@ class CourseService {
     return true;
   }
 }
+// Create a single instance to export
+const courseService = new CourseService();
 
-export default new CourseService();
+// Export both default and named for flexibility
+export default courseService;
+export { courseService };
