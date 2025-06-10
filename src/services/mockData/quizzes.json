@@ -1,0 +1,92 @@
+[
+  {
+    "id": "q101",
+    "lessonId": "101",
+    "passingScore": 70,
+    "questions": [
+      {
+        "id": "q101_1",
+        "type": "multiple-choice",
+        "question": "What function is used to display text in Python?",
+        "options": ["print()", "display()", "show()", "output()"],
+        "correctAnswer": "print()"
+      },
+      {
+        "id": "q101_2",
+        "type": "multiple-choice",
+        "question": "Which of the following is a valid Python comment?",
+        "options": ["// This is a comment", "# This is a comment", "/* This is a comment */", "<!-- This is a comment -->"],
+        "correctAnswer": "# This is a comment"
+      },
+      {
+        "id": "q101_3",
+        "type": "coding",
+        "question": "Write a Python program that prints 'Hello, Python!' to the screen.",
+        "instructions": "Use the print() function to display the message.",
+        "starterCode": "# Write your code here\n",
+        "expectedKeywords": ["print", "Hello, Python!"],
+        "language": "python"
+      }
+    ]
+  },
+  {
+    "id": "q102",
+    "lessonId": "102",
+    "passingScore": 75,
+    "questions": [
+      {
+        "id": "q102_1",
+        "type": "multiple-choice",
+        "question": "Which data type would you use to store a person's age?",
+        "options": ["string", "integer", "float", "boolean"],
+        "correctAnswer": "integer"
+      },
+      {
+        "id": "q102_2",
+        "type": "multiple-choice",
+        "question": "What is the correct way to create a string variable in Python?",
+        "options": ["name = 'John'", "string name = 'John'", "var name = 'John'", "name := 'John'"],
+        "correctAnswer": "name = 'John'"
+      },
+      {
+        "id": "q102_3",
+        "type": "coding",
+        "question": "Create variables for a student's name, age, and GPA, then print them.",
+        "instructions": "Create three variables and use print() to display their values.",
+        "starterCode": "# Create your variables here\nname = \nage = \ngpa = \n\n# Print the values\n",
+        "expectedKeywords": ["name", "age", "gpa", "print"],
+        "language": "python"
+      }
+    ]
+  },
+  {
+    "id": "q201",
+    "lessonId": "201",
+    "passingScore": 70,
+    "questions": [
+      {
+        "id": "q201_1",
+        "type": "multiple-choice",
+        "question": "What function is used to output text to the console in JavaScript?",
+        "options": ["print()", "console.log()", "alert()", "document.write()"],
+        "correctAnswer": "console.log()"
+      },
+      {
+        "id": "q201_2",
+        "type": "multiple-choice",
+        "question": "Where can JavaScript code be executed?",
+        "options": ["Only in web browsers", "Only on servers", "Both browsers and servers", "Only in mobile apps"],
+        "correctAnswer": "Both browsers and servers"
+      },
+      {
+        "id": "q201_3",
+        "type": "coding",
+        "question": "Write JavaScript code that outputs 'Welcome to JavaScript!' to the console.",
+        "instructions": "Use console.log() to display the message.",
+        "starterCode": "// Write your code here\n",
+        "expectedKeywords": ["console.log", "Welcome to JavaScript!"],
+        "language": "javascript"
+      }
+    ]
+  }
+]

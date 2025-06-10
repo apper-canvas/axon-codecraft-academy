@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import react-toastify CSS */
+@import 'react-toastify/dist/ReactToastify.css';
+
+/* Ensure scrollbars are visible */
+body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Prevent horizontal overflow */
+* {
+  max-width: 100%;
+}
+
+/* Main content areas must allow scroll */
+.main-content {
+  overflow-y: auto;
+  height: 100vh;
+}
+
+@layer utilities {
+  /* Only use scrollbar-hide for specific UI elements, never main content */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Code editor styles */
+.code-editor {
+  font-family: 'JetBrains Mono', monospace;
+  background-color: #1f2328;
+  color: #e6edf3;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.code-editor textarea {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  color: inherit;
+  resize: none;
+  width: 100%;
+  min-height: 200px;
+  line-height: 1.5;
+}
+
+/* Syntax highlighting */
+.token.keyword {
+  color: #ff7b72;
+}
+
+.token.string {
+  color: #a5d6ff;
+}
+
+.token.number {
+  color: #79c0ff;
+}
+
+.token.function {
+  color: #d2a8ff;
+}
+
+.token.comment {
+  color: #8b949e;
+  font-style: italic;
+}
+
+/* Progress ring animation */
+@keyframes progress-ring {
+  0% {
+    stroke-dashoffset: 251.2;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.progress-ring {
+  animation: progress-ring 1s ease-out;
+}

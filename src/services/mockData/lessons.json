@@ -1,0 +1,72 @@
+[
+  {
+    "id": "101",
+    "courseId": "1",
+    "title": "Introduction to Python",
+    "content": "<h2>Welcome to Python!</h2><p>Python is a powerful, easy-to-learn programming language. It has efficient high-level data structures and a simple but effective approach to object-oriented programming.</p><h3>Why Python?</h3><ul><li>Easy to read and write</li><li>Extensive standard library</li><li>Great for beginners</li><li>Used in web development, data science, AI, and more</li></ul><p>Let's start your Python journey!</p>",
+    "codeExamples": [
+      {
+        "title": "Your First Python Program",
+        "code": "print(\"Hello, World!\")\nprint(\"Welcome to Python programming!\")",
+        "explanation": "The print() function displays text on the screen. This is often the first program people write when learning a new language."
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": "102",
+    "courseId": "1",
+    "title": "Variables and Data Types",
+    "content": "<h2>Variables and Data Types</h2><p>Variables are containers for storing data values. Python has various data types including strings, integers, floats, and booleans.</p><h3>Basic Data Types:</h3><ul><li><strong>String:</strong> Text data</li><li><strong>Integer:</strong> Whole numbers</li><li><strong>Float:</strong> Decimal numbers</li><li><strong>Boolean:</strong> True or False values</li></ul>",
+    "codeExamples": [
+      {
+        "title": "Variable Examples",
+        "code": "name = \"Alice\"\nage = 25\nheight = 5.6\nis_student = True\n\nprint(f\"Name: {name}\")\nprint(f\"Age: {age}\")\nprint(f\"Height: {height}\")\nprint(f\"Is student: {is_student}\")",
+        "explanation": "Variables can store different types of data. Python automatically determines the data type based on the value assigned."
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": "201",
+    "courseId": "2",
+    "title": "JavaScript Basics",
+    "content": "<h2>Introduction to JavaScript</h2><p>JavaScript is the programming language of the web. It's used to create interactive websites and web applications.</p><h3>Key Features:</h3><ul><li>Dynamic typing</li><li>Interpreted language</li><li>Event-driven programming</li><li>Runs in browsers and servers</li></ul>",
+    "codeExamples": [
+      {
+        "title": "Hello JavaScript",
+        "code": "console.log(\"Hello, JavaScript!\");\nconsole.log(\"Let's start coding!\");",
+        "explanation": "console.log() is used to output messages to the browser's console. It's the JavaScript equivalent of Python's print()."
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": "202",
+    "courseId": "2",
+    "title": "JavaScript Variables",
+    "content": "<h2>Variables in JavaScript</h2><p>JavaScript has three ways to declare variables: var, let, and const. Each has different scoping rules and use cases.</p><h3>Variable Types:</h3><ul><li><strong>let:</strong> Block-scoped, can be reassigned</li><li><strong>const:</strong> Block-scoped, cannot be reassigned</li><li><strong>var:</strong> Function-scoped (older syntax)</li></ul>",
+    "codeExamples": [
+      {
+        "title": "Variable Declaration",
+        "code": "let name = \"Bob\";\nconst age = 30;\nlet isWorking = true;\n\nconsole.log(`Name: ${name}`);\nconsole.log(`Age: ${age}`);\nconsole.log(`Is working: ${isWorking}`);",
+        "explanation": "Use let for variables that will change, const for constants, and template literals (backticks) for string formatting."
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": "301",
+    "courseId": "3",
+    "title": "Java Class Basics",
+    "content": "<h2>Introduction to Java Classes</h2><p>Classes are the foundation of object-oriented programming in Java. A class is a blueprint for creating objects.</p><h3>Class Components:</h3><ul><li><strong>Fields:</strong> Variables that store data</li><li><strong>Methods:</strong> Functions that define behavior</li><li><strong>Constructor:</strong> Special method for object creation</li></ul>",
+    "codeExamples": [
+      {
+        "title": "Simple Java Class",
+        "code": "public class Person {\n    private String name;\n    private int age;\n    \n    public Person(String name, int age) {\n        this.name = name;\n        this.age = age;\n    }\n    \n    public void introduce() {\n        System.out.println(\"Hi, I'm \" + name + \" and I'm \" + age + \" years old.\");\n    }\n}",
+        "explanation": "This class defines a Person with name and age fields, a constructor to initialize them, and a method to introduce the person."
+      }
+    ],
+    "order": 1
+  }
+]

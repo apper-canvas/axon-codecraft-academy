@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "title": "Python Fundamentals",
+    "language": "Python",
+    "difficulty": "Beginner",
+    "description": "Learn the basics of Python programming including variables, data types, control structures, and functions. Perfect for beginners with no prior programming experience.",
+    "lessonCount": 8,
+    "duration": "4-6 hours"
+  },
+  {
+    "id": "2",
+    "title": "JavaScript Essentials",
+    "language": "JavaScript",
+    "difficulty": "Beginner",
+    "description": "Master the fundamentals of JavaScript, the language of the web. Cover variables, functions, DOM manipulation, and event handling.",
+    "lessonCount": 10,
+    "duration": "5-7 hours"
+  },
+  {
+    "id": "3",
+    "title": "Java Object-Oriented Programming",
+    "language": "Java",
+    "difficulty": "Intermediate",
+    "description": "Dive deep into object-oriented programming concepts using Java. Learn about classes, objects, inheritance, polymorphism, and encapsulation.",
+    "lessonCount": 12,
+    "duration": "8-10 hours"
+  },
+  {
+    "id": "4",
+    "title": "Advanced Python Data Structures",
+    "language": "Python",
+    "difficulty": "Advanced",
+    "description": "Explore advanced Python concepts including decorators, generators, context managers, and complex data structures like heaps and graphs.",
+    "lessonCount": 15,
+    "duration": "10-12 hours"
+  },
+  {
+    "id": "5",
+    "title": "Modern JavaScript (ES6+)",
+    "language": "JavaScript",
+    "difficulty": "Intermediate",
+    "description": "Learn modern JavaScript features including arrow functions, destructuring, async/await, modules, and the latest ES6+ syntax.",
+    "lessonCount": 9,
+    "duration": "6-8 hours"
+  }
+]

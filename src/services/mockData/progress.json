@@ -1,0 +1,30 @@
+[
+  {
+    "courseId": "1",
+    "completedLessons": ["101"],
+    "quizScores": {
+      "101": 85
+    },
+    "lastAccessed": "2024-01-15T10:30:00Z",
+    "lastLessonId": "102"
+  },
+  {
+    "courseId": "2",
+    "completedLessons": ["201", "202"],
+    "quizScores": {
+      "201": 92,
+      "202": 78
+    },
+    "lastAccessed": "2024-01-14T16:45:00Z",
+    "lastLessonId": "202"
+  },
+  {
+    "courseId": "3",
+    "completedLessons": ["301"],
+    "quizScores": {
+      "301": 88
+    },
+    "lastAccessed": "2024-01-13T09:15:00Z",
+    "lastLessonId": "301"
+  }
+]
