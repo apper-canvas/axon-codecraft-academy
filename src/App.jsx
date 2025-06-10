@@ -13,7 +13,8 @@ function App() {
           <Route path="course/:courseId" element={<routes.courseOverview.component />} />
           <Route path="course/:courseId/lesson/:lessonId" element={<routes.lessonView.component />} />
           <Route path="lesson/:lessonId/quiz" element={<routes.quizScreen.component />} />
-          <Route path="progress" element={<routes.progress.component />} />
+<Route path="progress" element={<routes.progress.component />} />
+          <Route path="playground" element={<routes.playground.component />} />
           <Route path="*" element={<routes.notFound.component />} />
         </Route>
       </Routes>

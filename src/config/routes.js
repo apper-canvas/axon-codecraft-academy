@@ -4,6 +4,7 @@ import CourseOverviewPage from '@/components/pages/CourseOverviewPage';
 import LessonViewPage from '@/components/pages/LessonViewPage';
 import QuizScreenPage from '@/components/pages/QuizScreenPage';
 import ProgressDashboardPage from '@/components/pages/ProgressDashboardPage';
+import CodePlaygroundPage from '@/components/pages/CodePlaygroundPage';
 import NotFoundPage from '@/components/pages/NotFoundPage';
 
 export const routes = {
@@ -27,6 +28,13 @@ component: CourseLibraryPage
     path: '/progress',
     icon: 'TrendingUp',
 component: ProgressDashboardPage
+  },
+  playground: {
+    id: 'playground',
+    label: 'Code Playground',
+    path: '/playground',
+    icon: 'Code2',
+    component: CodePlaygroundPage
   },
   courseOverview: {
     id: 'courseOverview',

@@ -1,4 +1,10 @@
-export { default as courseService } from './api/courseService';
-export { default as lessonService } from './api/lessonService';
-export { default as quizService } from './api/quizService';
-export { default as progressService } from './api/progressService';
+export { courseService } from './api/courseService';
+export { lessonService } from './api/lessonService';
+export { progressService } from './api/progressService';
+export { quizService } from './api/quizService';
+export { snippetService } from './api/snippetService';
+
+// Re-export all services for easy importing
+export * from './api/courseService';
+export * from './api/lessonService';
+export * from './api/progressService';

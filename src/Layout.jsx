@@ -41,8 +41,18 @@ function Layout() {
                 >
                   <ApperIcon name={route.icon} className="w-4 h-4" />
                   <span>{route.label}</span>
-                </NavLink>
+</NavLink>
               ))}
+              {/* Playground Button */}
+              <NavLink
+                to="/playground"
+                className={`flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium transition-all duration-150 hover:bg-primary/90 ${
+                  isActive('/playground') ? 'ring-2 ring-primary/20' : ''
+                }`}
+              >
+                <ApperIcon name="Code2" className="w-4 h-4" />
+                <span>Playground</span>
+              </NavLink>
             </nav>
 
             {/* Mobile menu button */}
@@ -90,8 +100,19 @@ function Layout() {
                     >
                       <ApperIcon name={route.icon} className="w-5 h-5" />
                       <span>{route.label}</span>
-                    </NavLink>
+</NavLink>
                   ))}
+                  {/* Mobile Playground Button */}
+                  <NavLink
+                    to="/playground"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center space-x-3 px-4 py-3 bg-primary text-white rounded-lg text-sm font-medium transition-all duration-150 ${
+                      isActive('/playground') ? 'ring-2 ring-primary/20' : ''
+                    }`}
+                  >
+                    <ApperIcon name="Code2" className="w-5 h-5" />
+                    <span>Code Playground</span>
+                  </NavLink>
                 </nav>
               </motion.div>
             </>

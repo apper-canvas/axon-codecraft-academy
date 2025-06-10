@@ -1,0 +1,44 @@
+{
+  "snippets": [
+    {
+      "id": 1,
+      "title": "Hello World Python",
+      "code": "def hello_world():\n    print(\"Hello, World!\")\n    return \"Welcome to Python!\"\n\nresult = hello_world()\nprint(f\"Result: {result}\")",
+      "language": "python",
+      "description": "A simple Hello World example in Python",
+      "isPublic": true,
+      "tags": ["beginner", "hello-world", "python"],
+      "createdAt": "2024-01-15T10:30:00Z",
+      "updatedAt": "2024-01-15T10:30:00Z",
+      "shareUrl": "/playground?snippet=1",
+      "embedCode": "<iframe src=\"/playground?snippet=1&embed=true\" width=\"100%\" height=\"400\" frameborder=\"0\"></iframe>"
+    },
+    {
+      "id": 2,
+      "title": "JavaScript Array Methods",
+      "code": "const numbers = [1, 2, 3, 4, 5];\n\n// Map, filter, and reduce\nconst doubled = numbers.map(n => n * 2);\nconst evens = numbers.filter(n => n % 2 === 0);\nconst sum = numbers.reduce((acc, n) => acc + n, 0);\n\nconsole.log('Original:', numbers);\nconsole.log('Doubled:', doubled);\nconsole.log('Evens:', evens);\nconsole.log('Sum:', sum);",
+      "language": "javascript",
+      "description": "Demonstrating common JavaScript array methods",
+      "isPublic": false,
+      "tags": ["javascript", "arrays", "methods"],
+      "createdAt": "2024-01-16T14:15:00Z",
+      "updatedAt": "2024-01-16T14:15:00Z",
+      "shareUrl": null,
+      "embedCode": null
+    },
+    {
+      "id": 3,
+      "title": "Java Class Example",
+      "code": "public class Calculator {\n    private double result;\n    \n    public Calculator() {\n        this.result = 0.0;\n    }\n    \n    public double add(double a, double b) {\n        result = a + b;\n        return result;\n    }\n    \n    public double getResult() {\n        return result;\n    }\n    \n    public static void main(String[] args) {\n        Calculator calc = new Calculator();\n        double sum = calc.add(10.5, 20.3);\n        System.out.println(\"Sum: \" + sum);\n    }\n}",
+      "language": "java",
+      "description": "Basic Java class with constructor and methods",
+      "isPublic": true,
+      "tags": ["java", "class", "oop"],
+      "createdAt": "2024-01-17T09:45:00Z",
+      "updatedAt": "2024-01-17T09:45:00Z",
+      "shareUrl": "/playground?snippet=3",
+      "embedCode": "<iframe src=\"/playground?snippet=3&embed=true\" width=\"100%\" height=\"400\" frameborder=\"0\"></iframe>"
+    }
+  ],
+  "nextId": 4
+}
