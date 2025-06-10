@@ -97,7 +97,10 @@ class ProgressService {
     }
     this.progress.splice(index, 1);
     return true;
-  }
+}
 }
 
-export default new ProgressService();
+const progressService = new ProgressService();
+
+export default progressService;
+export { progressService };
